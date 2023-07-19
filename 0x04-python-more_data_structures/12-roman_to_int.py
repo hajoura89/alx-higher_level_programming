@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-#function that converts a Roman numeral to an integer
 def to_subtract(list_num):
     to_sub = 0
     max_list = max(list_num)
