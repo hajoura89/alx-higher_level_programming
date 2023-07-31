@@ -4,17 +4,14 @@ import sys
 
 
 def safe_print_integer_err(value):
-    """Prints an integer with "{:d}".format().
-
-    If a ValueError message is caught, a corresponding
-    message is printed to standard error.
+    """Function that prints an integer.
 
     Args:
         value (int): The integer to print.
 
     Returns:
-        If a TypeError or ValueError occurs - False.
-        Otherwise - True.
+        True if value has been correctly printed
+		Otherwise, False and prints in stderr the error precede by Exception
     """
     try:
         print("{:d}".format(value))
