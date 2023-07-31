@@ -2,10 +2,13 @@
 import sys
 def safe_print_integer_err(value):
     """Function that prints an integer.
+    
     If a ValueError message is caught, a corresponding
     message is printed to standard error.
+    
     Args:
         value (int): The integer to print.
+    
     Returns:
         If a TypeError or ValueError occurs - False.
         Otherwise - True.
