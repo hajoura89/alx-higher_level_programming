@@ -7,10 +7,10 @@ class Square:
     """Define a square"""
 
     def __init__(self, size=0, position=(0, 0)):
-        """Instantiation with size
+        """Instantiation
 
         Args:
-            size (int): The size of the new squarei
+            size (int): The size of the new square.
             position (int, int): The position of the new square.
         """
         self.size = size
@@ -32,12 +32,12 @@ class Square:
 
     @property
     def position(self):
-        """Get the current position of the square."""
+        """Get the current position of the square"""
         return (self.__position)
 
     @position.setter
     def position(self, value):
-        """Set value to the current position of the square."""
+        """Set value the current position of the square"""
         if (not isinstance(value, tuple) or
                 len(value) != 2 or
                 not all(isinstance(num, int) for num in value) or
@@ -50,7 +50,7 @@ class Square:
         return (self.__size * self.__size)
 
     def my_print(self):
-        """Print in  stdout the square with the # character"""
+        """Print the square with the # character"""
         if self.__size == 0:
             print("")
             return
@@ -59,4 +59,4 @@ class Square:
         for i in range(0, self.__size):
             [print(" ", end="") for j in range(0, self.__position[0])]
             [print("#", end="") for k in range(0, self.__size)]
-            print("")      
+            print("")
