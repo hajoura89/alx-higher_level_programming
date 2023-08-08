@@ -97,10 +97,10 @@ def rec_solve(board, row, queens, solutions):
             tmp_board = deepcopy(board)
             tmp_board[row][c] = "Q"
             x_out(tmp_board, row, c)
-            solutions = rec_solve(tmp_board, row + 1,
-                                        queens + 1, solutions)
+            solutions = rec_solve(tmp_board,
+            row + 1, queens + 1, solutions)
 
-    return (solutions)
+            return (solutions)
 
 
 if __name__ == "__main__":
