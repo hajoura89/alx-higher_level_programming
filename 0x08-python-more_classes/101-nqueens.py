@@ -37,40 +37,32 @@ def out(chessboard, row, col):
         row (int): The row where a queen was last played.
         col (int): The column where a queen was last played.
     """
-    # X out all forward spots
     for c in range(col + 1, len(chessboard)):
         chessboard[row][c] = "x"
-    # X out all backwards spots
     for c in range(col - 1, -1, -1):
         chessboard[row][c] = "x"
-    # X out all spots below
     for r in range(row + 1, len(chessboard)):
         chessboard[r][col] = "x"
-    # X out all spots above
     for r in range(row - 1, -1, -1):
         chessboard[r][col] = "x"
-    # X out all spots diagonally down to the right
     c = col + 1
     for r in range(row + 1, len(chessboard)):
         if c >= len(chessboard):
             break
         chessboard[r][c] = "x"
         c += 1
-    # X out all spots diagonally up to the left
     c = col - 1
     for r in range(row - 1, -1, -1):
         if c < 0:
             break
         chessboard[r][c]
         c -= 1
-    # X out all spots diagonally up to the right
     c = col + 1
     for r in range(row - 1, -1, -1):
         if c >= len(chessboard):
             break
         chessboard[r][c] = "x"
         c += 1
-    # X out all spots diagonally down to the left
     c = col - 1
     for r in range(row + 1, len(chessboard)):
         if c < 0:
