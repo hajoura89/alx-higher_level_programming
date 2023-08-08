@@ -1,0 +1,108 @@
+===============================
+0. Integer Addition Module
+===============================
+
+Module Import:
+==============
+    >>> add_integer = __import__('0-add_integer').add_integer
+
+
+Function Description:
+======================
+Write a function that performs addition on two integers.
+
+
+Operations:
+===========
+The input parameters 'a' and 'b' must be either integers or floats.
+If they are not, a TypeError exception will be raised with
+the message 'a must be an integer' or 'b must be an integer'.
+
+
+Section :: Non-Parameters
+=========================
+Test-0: Testing the function without parameters
+    >>> add_integer()
+    Traceback (most recent call last):
+    TypeError: add_integer() missing 1 required positional argument: 'a'
+
+Test-1: Testing the function with an undefined argument
+    >>> add_integer(a, 123)
+    Traceback (most recent call last):
+    NameError: name 'a' is not defined
+
+Test-2: Testing the function with only 'a' parameter
+    >>> add_integer(5)
+    103
+
+Test-3: Testing the function with 'a' as float and default 'b'
+    >>> add_integer(1.0)
+    99
+
+
+Section :: Numbers
+==================
+Test-4: Adding two integers
+    >>> add_integer(1, 2)
+    3
+
+Test-5: Adding two floats
+    >>> add_integer(10.0, 15.0)
+    25
+
+Test-6: Adding an integer and a float
+    >>> add_integer(6, 20.0)
+    26
+
+Test-7: Adding a float and an integer
+    >>> add_integer(10.0, 8)
+    18
+
+Test-8: Adding two negative floats
+    >>> add_integer(-6.5, -5)
+    -11
+
+Test-9: Adding a float and a negative integer
+    >>> add_integer(100.5, -10)
+    90
+
+Test-10: Attempting to add an integer and a large float
+    >>> add_integer(5, 1e400)
+    Traceback (most recent call last):
+    OverflowError: cannot convert float infinity to integer
+
+Test-11: Attempting to add a large float and a negative integer
+    >>> add_integer(999e9999, -1)
+    Traceback (most recent call last):
+    OverflowError: cannot convert float infinity to integer
+
+
+Section :: Non-Numbers
+======================
+Test-12: Testing the function with 'None' as the first parameter
+    >>> add_integer(None, 2)
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+Test-13: Testing the function with 'None' as the second parameter
+    >>> add_integer(5, None)
+    Traceback (most recent call last):
+    TypeError: b must be an integer
+
+Test-14: Testing the function with a list as the first parameter
+    >>> add_integer([1, 2], 15)
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+Test-15: Testing the function with a string as the second parameter
+    >>> add_integer(1, "Monty Python")
+    Traceback (most recent call last):
+    TypeError: b must be an integer
+
+
+Section :: Types
+==================
+Test-16: Checking the returned type of the add_integer function
+    >>> type(add_integer(5, 5))
+    <class 'int'>
+
