@@ -1,97 +1,103 @@
 #!/usr/bin/python3
-"""A program that solves the N queens problem"""
+"""Solves the N-queens puzzle"""
 import sys
 
 
-def init_chessboard(n):
-    """Initialize with 0"""
-    chessboard = []
-    [chessboard.append([]) for i in range(n)]
-    [row.append(' ') for i in range(n) for row in chessboard]
-    return (chessboard)
+def init_board(n):
+    """Initialize a chessboard with 0"""
+    board = []
+    [board.append([]) for i in range(n)]
+    [row.append(' ') for i in range(n) for row in board]
+    return (board)
 
 
-def chessboard_copy(chessboard):
-    """Return a deepcopy"""
-    if isinstance(chessboard, list):
-        return list(map(chessboard_copy, chessboard))
-    return (chessboard)
+def deepcopy(board):
+    """Deepcopy of a chessboard"""
+    if isinstance(board, list):
+        return list(map(deepcopy, board))
+    return (board)
 
 
-def solution(chessboard):
+def solve(board):
     """lists representation of a solved chessboard"""
     solution = []
-    for r in range(len(chessboard)):
-        for c in range(len(chessboard)):
-            if chessboard[r][c] == "Q":
+    for r in range(len(board)):
+        for c in range(len(board)):
+            if board[r][c] == "Q":
                 solution.append([r, c])
                 break
     return (solution)
 
 
-def out(chessboard, row, col):
-    """Out spots on a chesschessboard
-
+def x_out(board, row, col):
+    """x_out spots on a chessboard
     Args:
-        chessboard (list): The current working chesschessboard.
+        board (list): The current working chessboard.
         row (int): The row where a queen was last played.
         col (int): The column where a queen was last played.
     """
-    for c in range(col + 1, len(chessboard)):
-        chessboard[row][c] = "x"
+    # x_out all forward spots
+    for c in range(col + 1, len(board)):
+        board[row][c] = "x"
+    # x_out all backwards spots
     for c in range(col - 1, -1, -1):
-        chessboard[row][c] = "x"
-    for r in range(row + 1, len(chessboard)):
-        chessboard[r][col] = "x"
+        board[row][c] = "x"
+    # x_out all spots below
+    for r in range(row + 1, len(board)):
+        board[r][col] = "x"
+    # x_out all spots above
     for r in range(row - 1, -1, -1):
-        chessboard[r][col] = "x"
+        board[r][col] = "x"
+    # x_out all spots diagonally down to the right
     c = col + 1
-    for r in range(row + 1, len(chessboard)):
-        if c >= len(chessboard):
+    for r in range(row + 1, len(board)):
+        if c >= len(board):
             break
-        chessboard[r][c] = "x"
+        board[r][c] = "x"
         c += 1
+    # x_out all spots diagonally up to the left
     c = col - 1
     for r in range(row - 1, -1, -1):
         if c < 0:
             break
-        chessboard[r][c]
+        board[r][c]
         c -= 1
+    # x_out all spots diagonally up to the right
     c = col + 1
     for r in range(row - 1, -1, -1):
-        if c >= len(chessboard):
+        if c >= len(board):
             break
-        chessboard[r][c] = "x"
+        board[r][c] = "x"
         c += 1
+    # x_out all spots diagonally down to the left
     c = col - 1
-    for r in range(row + 1, len(chessboard)):
+    for r in range(row + 1, len(board)):
         if c < 0:
             break
-        chessboard[r][c] = "x"
+        board[r][c] = "x"
         c -= 1
 
 
-def solve(chessboard, row, queens, solutions):
-    """Solve an N-queens puzzle
-
+def rec_solve(board, row, queens, solutions):
+    """Recursively solve an N-queens puzzle
     Args:
-        chessboard (list): The current working chesschessboard.
+        board (list): The current working chessboard.
         row (int): The current working row.
         queens (int): The current number of placed queens.
         solutions (list): A list of lists of solutions.
     Returns:
         solutions
     """
-    if queens == len(chessboard):
-        solutions.append(solution(chessboard))
+    if queens == len(board):
+        solutions.append(solve(board))
         return (solutions)
 
-    for c in range(len(chessboard)):
-        if chessboard[row][c] == " ":
-            tmp_chessboard = chessboard_copy(chessboard)
-            tmp_chessboard[row][c] = "Q"
-            out(tmp_chessboard, row, c)
-            solutions = solve(tmp_chessboard, row + 1,
+    for c in range(len(board)):
+        if board[row][c] == " ":
+            tmp_board = deepcopy(board)
+            tmp_board[row][c] = "Q"
+            x_out(tmp_board, row, c)
+            solutions = rec_solve(tmp_board, row + 1,
                                         queens + 1, solutions)
 
     return (solutions)
@@ -108,7 +114,7 @@ if __name__ == "__main__":
         print("N must be at least 4")
         sys.exit(1)
 
-    chessboard = init_chessboard(int(sys.argv[1]))
-    solutions = solve(chessboard, 0, 0, [])
+    board = init_board(int(sys.argv[1]))
+    solutions = rec_solve(board, 0, 0, [])
     for sol in solutions:
         print(sol)
