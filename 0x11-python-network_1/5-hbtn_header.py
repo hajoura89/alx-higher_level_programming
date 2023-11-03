@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Script that displays the X-Request-Id header variable of a request to a given URL
+Script that displays the X-Request-Id header
+variable of a request to a given URL
 """
 import sys
 import requests
